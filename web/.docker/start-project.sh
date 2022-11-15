@@ -39,7 +39,7 @@ if [ "${APP_ENVIRONMENT}" = "dev" ]; then
 
     chown -R $CONTAINER_USER:$CONTAINER_GROUP /home/$CONTAINER_USER
     chown -R $CONTAINER_USER:$CONTAINER_GROUP /var/www/html
-elif [ "${APP_ENVIRONMENT}" = "test" ]; then
+#elif [ "${APP_ENVIRONMENT}" = "test" ]; then
 #    SYMFONY_ENV=${APP_ENVIRONMENT} composer install
 #    SYMFONY_ENV=${APP_ENVIRONMENT} composer compile-test
 else
