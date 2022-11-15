@@ -17,6 +17,7 @@ services:
       - 9772:9772 # adjust your own port for webpack encore here, e.g. 8888:8080
       - 9773:443 # adjust your own port here to access page via iPhone or other mobile device in your local network
       - 9774:80 # adjust your own port here to access page via iPhone or other mobile device in your local network
+      - 3000:3000 # adjust your own port here to access page via iPhone or other mobile device in your local network
 
   mysql:
     restart: "no"

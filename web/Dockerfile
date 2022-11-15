@@ -146,17 +146,17 @@ COPY .docker /usr/local/
 #RUN cd /var/www/html; \
 #        composer install --optimize-autoloader --no-scripts
 
-#COPY package.json yarn.lock /var/www/html/
-#RUN cd /var/www/html; \
-#        yarn install
+COPY package.json yarn.lock /var/www/html/
+RUN cd /var/www/html; \
+        yarn install
 
 WORKDIR /var/www/html
 COPY . /var/www/html
 
-#RUN cd /var/www/html && \
-#    if [ "${APP_ENVIRONMENT}" != "dev" ]; then \
-#        yarn encore production; \
-#    fi
+RUN cd /var/www/html && \
+    if [ "${APP_ENVIRONMENT}" != "dev" ]; then \
+        yarn build; \
+    fi
 
 
 COPY .docker/start-project.sh /start-project.sh

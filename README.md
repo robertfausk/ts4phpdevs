@@ -1,5 +1,9 @@
-MyTeam
-==========
+Tripp
+=====
+
+https://typescriptlang.org/play
+
+after start: go to https://tripp.local:3000
 
 ### How to start local development?
 
