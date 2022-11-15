@@ -1,0 +1,60 @@
+# use this file for running the docker image
+version: '3.4'
+
+services:
+  web:
+    image: ${IMAGE:?IMAGE is not set or empty}
+    volumes:
+      - ${VOLUME_DIR_WEB:?VOLUME_DIR_WEB is not set or empty}apache-logs/:/var/log/apache2/
+      - ${VOLUME_DIR_WEB:?VOLUME_DIR_WEB is not set or empty}config-jwt/:/var/www/html/config/jwt/
+      - ${VOLUME_DIR_WEB:?VOLUME_DIR_WEB is not set or empty}symfony-logs/:/var/www/html/var/log/
+      - ${VOLUME_DIR_WEB:?VOLUME_DIR_WEB is not set or empty}images/:/var/www/html/public/upload/images/
+    environment:
+      - APP_DEBUG=${APP_DEBUG:-0}
+      - APP_ENVIRONMENT=${APP_ENVIRONMENT:-prod}
+      - APP_SECRET=${APP_SECRET:?APP_SECRET is not set or empty}
+      - MAILER_DSN=${MAILER_DSN:?MAILER_DSN is not set or empty}
+      - TRUSTED_HOSTS=^(127\.0\.0\.1|localhost|web|robert-t14s|((${SUBDOMAINS_LIST}\.)?${DOMAIN_NAME}))$$
+      - CORS_ALLOW_ORIGIN=^https://(${SUBDOMAINS_LIST}\.)?${DOMAIN_NAME}$$
+      - HOST_UID=${HOST_UID} # set in ~/.bashrc
+      - HOST_GID=${HOST_GID} # set in ~/.bashrc
+      - CONTAINER_USER=docker
+      - CONTAINER_GROUP=docker
+      - PHP_XDEBUG_ENABLED=${PHP_XDEBUG_ENABLED:?PHP_XDEBUG_ENABLED is not set or empty}
+      - DEPLOY_ENV=${DEPLOY_ENV:?DEPLOY_ENV is not set or empty}
+      - VIRTUAL_HOST=${VIRTUAL_HOST:?VIRTUAL_HOST is not set or empty}
+      - VIRTUAL_PORT=443
+      - VIRTUAL_PROTO=https
+      - JWT_PASSPHRASE=${JWT_PASSPHRASE:?JWT_PASSPHRASE is not set or empty}
+      - DB_NAME=${DB_NAME:?DB_NAME is not set or empty}
+      - DB_PASSWORD=${DB_PASSWORD:?DB_PASSWORD is not set or empty}
+      - DB_USER=${DB_USER:?DB_USER is not set or empty}
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+    restart: "always"
+    depends_on:
+      - mysql
+    healthcheck:
+      interval: 10s
+      timeout: 3s
+      retries: 3
+      start_period: 30s
+
+  mysql:
+    image: mysql:8.0
+    command: [ '--sql_mode=','--default-authentication-plugin=mysql_native_password' ]
+    volumes:
+      - ${VOLUME_DIR_MYSQL:?VOLUME_DIR_MYSQL is not set or empty}:/var/lib/mysql/
+    restart: "always"
+    expose:
+      - 3306
+    environment:
+      - TZ=Europe/Berlin
+      - MYSQL_DATABASE=${DB_NAME:?DB_NAME is not set or empty}
+      - MYSQL_PASSWORD=${DB_PASSWORD:?DB_PASSWORD is not set or empty}
+      - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD:?DB_ROOT_PASSWORD is not set or empty}
+      - MYSQL_USER=${DB_USER:?DB_USER is not set or empty}
+
+networks:
+  default:
+    external:
+      name: tripp-${DEPLOY_ENV?:DEPLOY_ENV is not set or empty}

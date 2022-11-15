@@ -1,0 +1,24 @@
+# use this file for building the docker image
+# and for running the development environment
+version: '3.4'
+
+services:
+  web:
+    build:
+      context: ./web
+      args:
+        APP_ENVIRONMENT: 'dev'
+    volumes:
+      - ./web/:/var/www/html
+      - ./.git:/var/www/html/.git
+      - ../nginx-proxy/certs:/var/www/certs # adjust to the place of your nginx-proxy; just needed for webpack encore dev server
+    restart: "no"
+    ports:
+      - 9772:9772 # adjust your own port for webpack encore here, e.g. 8888:8080
+      - 9773:443 # adjust your own port here to access page via iPhone or other mobile device in your local network
+      - 9774:80 # adjust your own port here to access page via iPhone or other mobile device in your local network
+
+  mysql:
+    restart: "no"
+    ports:
+      - 9001:3306 # adjust your own port here, e.g. 8871:8080
