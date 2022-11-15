@@ -3,9 +3,9 @@
     "src"
   ],
   "compilerOptions": {
-    "target": "es2015",
+    "target": "es2015", // pretty defensive setting for older browsers
     "module": "commonjs",
-    "strict": true,
+    "strict": true,  // use 'strict'; e.g.
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
