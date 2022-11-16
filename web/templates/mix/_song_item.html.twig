@@ -1,0 +1,13 @@
+<div class="song-list">
+   <div class="d-flex mb-3">
+       <a href="#">
+           <i class="fas fa-play me-3"></i>
+       </a>
+       <span class="song-details">{{ track.songTitle }} - {{ track.artistName }}</span>
+       {% if withControls|default(false) %}
+           <form action="{{ path('app_mix_edit_remove_track', {id: track.id }) }}" method="post">
+               <button type="submit" class="btn btn-link"><i class="fas fa-times"></i></button>
+           </form>
+       {% endif %}
+   </div>
+</div>
