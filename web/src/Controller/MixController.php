@@ -34,7 +34,7 @@ class MixController extends AbstractController
     {
         $track = new Track();
         $mix->addTrack($track);
-        $form = $this->createForm(TrackFormType::class, $track);
+        $form = $this->createForm(TrackFormType::class, $track, ['action' => $request->getUri()]);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
