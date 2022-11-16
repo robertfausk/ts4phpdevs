@@ -20,14 +20,7 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('favoriteTrack', EntityType::class, [
-                'class' => Track::class,
-                'placeholder' => 'Choose a song',
-                'choice_label' => function(Track $track) {
-                    return sprintf('%s (by %s)', $track->getSongTitle(), $track->getArtistName());
-                },
-                'autocomplete' => true, // it's enough
-            ])
+            ->add('favoriteTrack', FavoriteTrackAutocompleteField::class)
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
