@@ -12,8 +12,9 @@
             <div class="col-12 col-md-8 ps-5">
                 <h2 class="mb-4">{{ mix.trackCount }} songs <small>(genre: {{ mix.genre }})</small></h2>
                 <p>{{ mix.description }}</p>
-                <div {{ stimulus_controller('vote') }}>
-                    <span {{ stimulus_target('vote', 'total') }}>{{ mix.votes }}</span> votes
+                {# <div {{ stimulus_controller('vote') }} data-vote-total-number-value="{{ mix.votes }}">#}
+                <div {{ stimulus_controller('vote', {'totalNumber': mix.votes, voteUrl: path('app_mix_vote', {id: mix.id})}) }}>
+                    <span {{ stimulus_target('vote', 'total') }}>{{ mix.votes }} votes</span>
                     <button
                         {#                        data-action="jsaction->controller#methodInConroller"#}
                         {#                        data-action="click->counter#increment"#}
