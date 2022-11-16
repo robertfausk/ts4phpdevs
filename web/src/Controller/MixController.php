@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\UX\Turbo\TurboBundle;
 
 class MixController extends AbstractController
 {
@@ -42,6 +43,13 @@ class MixController extends AbstractController
 
             $entityManager->persist($track);
             $entityManager->flush();
+
+            if ($request->getPreferredFormat() === TurboBundle::STREAM_FORMAT) {
+                // causes a Content-Type response header to be set
+                $request->setRequestFormat(TurboBundle::STREAM_FORMAT);
+
+                return $this->render('mix/addSongSucess.stream.html.twig', ['mix' => $mix]);
+            }
 
             return $this->redirectToRoute('app_mix_edit', [
                 'slug' => $mix->getSlug(),
