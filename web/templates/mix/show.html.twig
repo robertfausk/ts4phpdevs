@@ -12,14 +12,20 @@
             <div class="col-12 col-md-8 ps-5">
                 <h2 class="mb-4">{{ mix.trackCount }} songs <small>(genre: {{ mix.genre }})</small></h2>
                 <p>{{ mix.description }}</p>
-
-                <div>
-                    <span>{{ mix.votes }}</span> votes
+                <div {{ stimulus_controller('vote') }}>
+                    <span {{ stimulus_target('vote', 'total') }}>{{ mix.votes }}</span> votes
                     <button
+                        {#                        data-action="jsaction->controller#methodInConroller"#}
+                        {#                        data-action="click->counter#increment"#}
+                        {#                        click is default action #}
+                        {#                        data-action="counter#increment"#}
+                        {#                        data-action="vote#upVote"#}
+                        {{ stimulus_action('vote', 'upVote') }}
                         class="btn btn-outline-primary"
                     ><span class="fa fa-thumbs-up"></span></button>
                     <button
                         class="btn btn-outline-primary"
+                        {{ stimulus_action('vote', 'downVote') }}
                     ><span class="fa fa-thumbs-down"></span></button>
                 </div>
 
