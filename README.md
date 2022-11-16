@@ -3,6 +3,11 @@ Tripp
 
 For symfony ux part see also: https://github.com/weaverryan/sfcon_2022_ux_workshop/tree/finished
 
+- Mercure + Streams
+  -  A) in your controller, render a stream template & send to Mercure
+  -  B) you can automatically have a stream template rendered whenever an entity is added/updated/deleted
+
+---
 
 https://typescriptlang.org/play
 

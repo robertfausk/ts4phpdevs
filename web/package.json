@@ -25,6 +25,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@fontsource/roboto-condensed": "^4.5.9"
+        "@fontsource/roboto-condensed": "^4.5.9",
+        "@popperjs/core": "^2.11.6"
     }
 }
