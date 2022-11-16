@@ -3,4 +3,26 @@
     <hr>
     <input data-model="firstName">
     First Name: {{ firstName }}
+    <hr>
+
+    <div>
+        <span>{{ mix.votes }} votes</span>
+        <button
+            data-action="live#action"
+            data-action-name="vote(direction=up)"
+            class="btn btn-outline-primary"
+        ><span class="fa fa-thumbs-up"></span></button>
+        <button
+            data-action="live#action"
+            data-action-name="vote(direction=down)"
+            class="btn btn-outline-primary"
+        ><span class="fa fa-thumbs-down"></span></button>
+        {% if isVoted %}
+            <span class="alert alert-success p-1">
+                <span class="fa fa-check"></span> thank ya!
+            </span>
+        {% endif %}
+    </div>
+
+    <hr>
 </div>
