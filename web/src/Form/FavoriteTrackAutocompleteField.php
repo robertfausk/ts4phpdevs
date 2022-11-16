@@ -20,6 +20,10 @@ class FavoriteTrackAutocompleteField extends AbstractType
             'choice_label' => function(Track $track) {
                 return sprintf('%s (by %s)', $track->getSongTitle(), $track->getArtistName());
             },
+//            https://symfony.com/bundles/ux-autocomplete/current/index.html#form-options-reference
+//            'security' => function(Security $security): bool {
+//                return $security->isGranted('ROLE_FOO');
+//            }
         ]);
     }
 
