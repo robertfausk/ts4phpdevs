@@ -22,6 +22,12 @@
             <span class="alert alert-success p-1">
                 <span class="fa fa-check"></span> thank ya!
             </span>
+
+            {% embed '_toast.html.twig' %}
+                {% block toast_body %}
+                    U voted! Great!
+                {% endblock %}
+            {% endembed %}
         {% endif %}
     </div>
 
