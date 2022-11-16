@@ -14,9 +14,9 @@ services:
       - ../nginx-proxy/certs:/var/www/certs # adjust to the place of your nginx-proxy; just needed for webpack encore dev server
     restart: "no"
     ports:
-      - 9772:9772 # adjust your own port for webpack encore here, e.g. 8888:8080
-      - 9773:443 # adjust your own port here to access page via iPhone or other mobile device in your local network
-      - 9774:80 # adjust your own port here to access page via iPhone or other mobile device in your local network
+      - 9512:9512 # adjust your own port for webpack encore here, e.g. 8888:8080
+      - 9513:443 # adjust your own port here to access page via iPhone or other mobile device in your local network
+      - 9514:80 # adjust your own port here to access page via iPhone or other mobile device in your local network
       - 3000:3000 # adjust your own port here to access page via iPhone or other mobile device in your local network
 
   mysql:
