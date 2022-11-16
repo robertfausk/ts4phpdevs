@@ -1,6 +1,9 @@
 Tripp
 =====
 
+For symfony ux part see also: https://github.com/weaverryan/sfcon_2022_ux_workshop/tree/finished
+
+
 https://typescriptlang.org/play
 
 after start: go to https://tripp.local:3000
