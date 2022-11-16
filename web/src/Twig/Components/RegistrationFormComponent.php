@@ -19,4 +19,10 @@ final class RegistrationFormComponent extends AbstractController
     {
         return $this->createForm(RegistrationFormType::class);
     }
+
+    private function getDataModelValue(): ?string // overwrites <form data-mode="on(change)|*"
+    {
+        return 'on(input)|*';
+        // return 'on(input)|debounce(500)|*'; // with debounce change
+    }
 }
